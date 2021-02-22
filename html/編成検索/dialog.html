@@ -1,0 +1,18 @@
+<dialog id="search_dialog">
+    <style>
+        #heroine {
+            /* display: grid; */
+            /* grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr; */
+            display: flex;
+            flex-wrap: wrap;
+        }
+        #heroine>div {
+            width : calc( 1em * 5 );
+        }
+    </style>
+    <form method="dialog">
+        <div id="heroine" name="heroine"></div>
+        <button value="ok">ok</button>
+        <button value="cancel">cancel</button>
+    </form>
+</dialog>

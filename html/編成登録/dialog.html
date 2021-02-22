@@ -1,0 +1,113 @@
+<dialog id="register_dialog">
+    <style>
+        #register_dialog fieldset {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+        }
+        div[data-party_member_id] {
+            grid-row: 2 / 3;
+        }
+        div[data-party_member_id] {
+            display: grid;
+            grid-template-columns: 1fr;
+        }
+        div[data-party_member_id] input[type="text"] {
+            width: 100%;
+        }
+    </style>
+    <fieldset>
+        <button value="" data-match="winner" data-party_member_id="1">（未設定）</button>
+        <div data-party_member_id="1">
+            <label>星</label><select name="star" value="5">
+                <option value="1">★☆☆☆☆</option>
+                <option value="2">★★☆☆☆</option>
+                <option value="3">★★★☆☆</option>
+                <option value="4">★★★★☆</option>
+                <option value="5" selected>★★★★★</option>
+                <option value="6">★★★★★★</option>
+            </select>
+            <label>Lv</label><input type="text" name="level">
+            <label>Rank</label><input type="text" name="rank">
+            <label>専用装備Lv</label><input type="text" name="special_weapon_level">
+        </div>
+        <button value="" data-match="winner" data-party_member_id="2">（未設定）</button>
+        <div data-party_member_id="2">
+            <label>星</label><select name="star" value="5">
+                <option value="1">★☆☆☆☆</option>
+                <option value="2">★★☆☆☆</option>
+                <option value="3">★★★☆☆</option>
+                <option value="4">★★★★☆</option>
+                <option value="5" selected>★★★★★</option>
+                <option value="6">★★★★★★</option>
+            </select>
+            <label>Lv</label><input type="text" name="level">
+            <label>Rank</label><input type="text" name="rank">
+            <label>専用装備Lv</label><input type="text" name="special_weapon_level">
+        </div>
+        <button value="" data-match="winner" data-party_member_id="3">（未設定）</button>
+        <div data-party_member_id="3">
+            <label>星</label><select name="star" value="5">
+                <option value="1">★☆☆☆☆</option>
+                <option value="2">★★☆☆☆</option>
+                <option value="3">★★★☆☆</option>
+                <option value="4">★★★★☆</option>
+                <option value="5" selected>★★★★★</option>
+                <option value="6">★★★★★★</option>
+            </select>
+            <label>Lv</label><input type="text" name="level">
+            <label>Rank</label><input type="text" name="rank">
+            <label>専用装備Lv</label><input type="text" name="special_weapon_level">
+        </div>
+        <button value="" data-match="winner" data-party_member_id="4">（未設定）</button>
+        <div data-party_member_id="4">
+            <label>星</label><select name="star" value="5">
+                <option value="1">★☆☆☆☆</option>
+                <option value="2">★★☆☆☆</option>
+                <option value="3">★★★☆☆</option>
+                <option value="4">★★★★☆</option>
+                <option value="5" selected>★★★★★</option>
+                <option value="6">★★★★★★</option>
+            </select>
+            <label>Lv</label><input type="text" name="level">
+            <label>Rank</label><input type="text" name="rank">
+            <label>専用装備Lv</label><input type="text" name="special_weapon_level">
+        </div>
+        <button value="" data-match="winner" data-party_member_id="5">（未設定）</button>
+        <div data-party_member_id="5">
+            <label>星</label><select name="star" value="5">
+                <option value="1">★☆☆☆☆</option>
+                <option value="2">★★☆☆☆</option>
+                <option value="3">★★★☆☆</option>
+                <option value="4">★★★★☆</option>
+                <option value="5" selected>★★★★★</option>
+                <option value="6">★★★★★★</option>
+            </select>
+            <label>Lv</label><input type="text" name="level">
+            <label>Rank</label><input type="text" name="rank">
+            <label>専用装備Lv</label><input type="text" name="special_weapon_level">
+        </div>
+        <button value="" data-match="loser" data-party_member_id="1">（未設定）</button>
+        <button value="" data-match="loser" data-party_member_id="2">（未設定）</button>
+        <button value="" data-match="loser" data-party_member_id="3">（未設定）</button>
+        <button value="" data-match="loser" data-party_member_id="4">（未設定）</button>
+        <button value="" data-match="loser" data-party_member_id="5">（未設定）</button>
+        <input type="text" name="match_remark">
+    </fieldset>
+    <form method="dialog">
+        <button value="ok">ok</button>
+        <button value="cancel">cancel</button>
+    </form>
+    <dialog id="heroine_select_dialog">
+        <style>
+            dialog#heroine_select_dialog>form {
+                width: 75vw;
+                display:grid;
+                grid-template-columns: repeat(auto-fit, 100px);
+            }
+            dialog#heroine_select_dialog>form [data-deleted="true"] {
+                color: gray;
+            }
+        </style>
+        <form method="dialog"></form>
+    </dialog>
+</dialog>

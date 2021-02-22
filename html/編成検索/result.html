@@ -1,0 +1,24 @@
+<style>
+    #matchs>div {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr 1fr 0.5fr 1fr 1fr 1fr 1fr;
+    }
+    #matchs>div [name="winner_party"] {
+        grid-column: 1 / 5;
+    }
+    #matchs>div [name="loser_party"] {
+        grid-column: 6 / 10;
+    }
+    #matchs>div [name="match_info"] {
+        text-align: right;
+        grid-column: 1 / 10;
+    }
+
+    #matchs>div [name="winner_party"],
+    #matchs>div [name="loser_party"] {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    }
+</style>
+<div id="matchs" name="matchs">
+</div>

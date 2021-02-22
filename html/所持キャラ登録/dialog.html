@@ -1,0 +1,42 @@
+<dialog id="heroines_possession_status_dialog">
+    <style>
+        #heroines_possession_status_dialog header,
+        #heroines_possession_status_dialog [name="heroines"] [name="row"] {
+            display: grid;
+            grid-template-columns: 40px 216px 110px 64px 64px 64px 6rem;
+        }
+        #heroines_possession_status_dialog header {
+            position: sticky;
+            top: 0;
+        }
+        #heroines_possession_status_dialog form {
+            position: sticky;
+            bottom: 0;
+        }
+        #heroines_possession_status_dialog label[name="name"] {
+            width: 216px;
+        }
+        #heroines_possession_status_dialog [data-special_weapon_level],
+        #heroines_possession_status_dialog [data-level],
+        #heroines_possession_status_dialog [data-rank] {
+            width: 56px;
+        }
+    </style>
+    <header>
+        <div>所持</div>
+        <div>名前</div>
+        <div>星</div>
+        <div>レベル</div>
+        <div>ランク</div>
+        <div>専用装備</div>
+        <div>更新日</div>
+    </header>
+    <template id="template_heroine_row" name="template_heroine_row">
+        <!-- ./template_heroine_row.html -->
+    </template>
+    <div name="heroines"></div>
+    <form method="dialog">
+        <button value="ok">ok</button>
+        <button value="cancel">cancel</button>
+    </form>
+</dialog>
