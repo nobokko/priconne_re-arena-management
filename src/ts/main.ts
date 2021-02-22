@@ -1,8 +1,8 @@
-import {RegisterDialog} from './ts/web-component/RegisterDialog';
-import {SearchDialog} from './ts/web-component/SearchDialog';
-import {HeroinesPossessionStatusDialog} from './ts/web-component/HeroinesPossessionStatusDialog';
-import {db, inited} from './ts/init';
-import {m_heroine} from './ts/model/m_heroine';
+import {RegisterDialog} from './web-component/RegisterDialog';
+import {SearchDialog} from './web-component/SearchDialog';
+import {HeroinesPossessionStatusDialog} from './web-component/HeroinesPossessionStatusDialog';
+import {db, inited} from './init';
+import {m_heroine} from './model/m_heroine';
 import lf from "lovefield";
 
 inited.then(() => {
