@@ -7,19 +7,28 @@ export class SearchDialog extends HTMLElement {
     constructor() {
         super();
 
+        const owner = this;
+
         const shadowRoot = this.attachShadow({ mode: 'open' });
 
-        shadowRoot.innerHTML = require('/src/html/編成検索/result.html').default + require('/src/html/編成検索/dialog.html').default;
+        shadowRoot.innerHTML = require('/src/html/編成検索/result.html').default +
+            require('/src/html/編成検索/dialog.html').default +
+            require('/src/html/編成検索/history.html').default
+            ;
 
         let search_dialog: (HTMLDialogElement | null) = shadowRoot.querySelector('dialog#search_dialog');
         let matchs_tag = shadowRoot.querySelector('div#matchs');
+        let history_tag: HTMLElement = shadowRoot.querySelector('div#history') ?? document.createElement('div');
+
+        history_tag.querySelectorAll('ol li').forEach(li => { li.remove(); });
+
         if (search_dialog) {
             ((search_dialog: HTMLDialogElement) => {
                 search_dialog.addEventListener('close', function () {
                     // body.appendChild(document.createTextNode(search_dialog.returnValue));
                     if (search_dialog.returnValue == 'ok') {
                         let checkboxies = search_dialog.querySelectorAll('form :checked');
-                        let search_heroine_id_list:Array<string> = [];
+                        let search_heroine_id_list: Array<string> = [];
                         checkboxies.forEach(checkbox => {
                             search_heroine_id_list.push((checkbox as HTMLInputElement).value);
                         });
@@ -153,6 +162,32 @@ export class SearchDialog extends HTMLElement {
                                                         });
                                                     })(matchs_tag);
                                                 }
+                                                ((list_tag) => {
+                                                    let li_tag = document.createElement('li');
+                                                    checkboxies.forEach(_checkbox => {
+                                                        let checkbox = (_checkbox as HTMLInputElement);
+                                                        const name = checkbox.getAttribute('data-name');
+                                                        const cos = checkbox.getAttribute('data-Costume');
+                                                        const id = checkbox.getAttribute('data-id');
+                                                        let character_tag = document.createElement('span');
+                                                        character_tag.innerText = `${name}（${cos}）`;
+                                                        character_tag.setAttribute('data-id', `${id}`);
+                                                        li_tag.appendChild(character_tag);
+                                                    });
+                                                    li_tag.addEventListener('click', () => {
+                                                        owner.preopen(() => {
+                                                            search_heroine_id_list.forEach(id => {
+                                                                search_dialog.querySelectorAll('input[type=checkbox][value="' + id + '"]').forEach(ele => {
+                                                                    (ele as HTMLInputElement).checked = true;
+                                                                });
+                                                            });
+                                                        });
+                                                    });
+                                                    list_tag.prepend(li_tag);
+                                                    if (list_tag.querySelectorAll('li').length > (5)) {
+                                                        list_tag.querySelector('li:last-of-type')?.remove();
+                                                    }
+                                                })(history_tag.querySelector('ol') ?? document.createElement('ol'));
                                             });
                                     });
                             });
@@ -183,7 +218,7 @@ export class SearchDialog extends HTMLElement {
     showModal(): void {
         this.preopen();
     }
-    preopen() {
+    preopen(plugin = () => { }) {
         const shadowRoot = this.shadowRoot ?? this.attachShadow({ mode: 'open' });
         let search_dialog: (HTMLDialogElement | null) = shadowRoot.querySelector('dialog#search_dialog');
         if (search_dialog) {
@@ -193,13 +228,12 @@ export class SearchDialog extends HTMLElement {
             }
 
             // Schema is defined, now connect to the database instance.
-            db.then(function(db) {
+            db.then(function (db) {
                 let table_m_heroine = db.getSchema().table('m_heroine');
 
                 inited.then(() => {
-                    // return db.select().from(table_m_heroine).where(table_m_heroine.name.eq('コッコロ')).exec();
                     return (db.select().from(table_m_heroine).orderBy(table_m_heroine.name, lf.Order.ASC).exec() as Promise<m_heroine[]>);
-                }).then(function(results){
+                }).then(function (results) {
                     results.forEach((row) => {
                         // body.appendChild(document.createTextNode(row['name'] + '(' + row['Costume'] + ')'));
                         heroine_tag?.appendChild(((row) => {
@@ -221,6 +255,8 @@ export class SearchDialog extends HTMLElement {
                             return div;
                         })(row));
                     });
+                }).then(() => {
+                    return plugin();
                 }).then(() => {
                     search_dialog?.showModal();
                 });
