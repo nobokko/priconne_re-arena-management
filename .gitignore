@@ -108,3 +108,5 @@ dist
 package-lock.json
 src/ts/**/*.js
 src/ts/**/*.js.map
+src/.DS_Store
+.DS_Store

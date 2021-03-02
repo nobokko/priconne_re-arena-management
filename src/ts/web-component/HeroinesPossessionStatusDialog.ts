@@ -1,7 +1,7 @@
 import { db, inited } from '../init';
 import lf from "lovefield";
-import {m_heroine} from '../model/m_heroine';
-import {t_heroine_status} from '../model/t_heroine_status';
+import { m_heroine } from '../model/m_heroine';
+import { t_heroine_status } from '../model/t_heroine_status';
 
 export class HeroinesPossessionStatusDialog extends HTMLElement {
     constructor() {
@@ -105,7 +105,7 @@ export class HeroinesPossessionStatusDialog extends HTMLElement {
     }
     adoptedCallback() {
     }
-    showModal():void {
+    showModal(): void {
         this.preopen();
     }
     preopen() {
@@ -127,7 +127,7 @@ export class HeroinesPossessionStatusDialog extends HTMLElement {
                     leftOuterJoin(table_t_heroine_status, table_t_heroine_status.heroine_id.eq(table_m_heroine.id)).
                     orderBy(table_m_heroine.name, lf.Order.ASC).
                     orderBy(table_m_heroine.Costume, lf.Order.ASC);
-                query.exec().then((results) => {
+                query.exec().then((results: any[]) => {
 
                     const tmpl = require('/src/html/所持キャラ登録/template_heroine_row.html').default;;
                     let h_list = heroines_possession_status_dialog?.querySelector('[name="heroines"]');
@@ -138,7 +138,7 @@ export class HeroinesPossessionStatusDialog extends HTMLElement {
                     }
 
                     results.forEach((r) => {
-                        let record:RecordBase = (r as RecordBase);
+                        let record: RecordBase = (r as RecordBase);
                         let ele = document.createElement('div');
                         ele.innerHTML = tmpl;
                         const has_data = record.t_heroine_status && (record.t_heroine_status.id != null);
