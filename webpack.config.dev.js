@@ -1,36 +1,18 @@
-const HtmlWebpackPlugin = require('html-webpack-plugin');
 
-module.exports = {
-    mode: 'development',
+const { merge } = require("webpack-merge");
+const common = require("./webpack.config.js");
+const path = require("path");
 
-    entry: {
-        main: './src/ts/main.ts',
+module.exports = merge(common(), {
+    mode: "development",
+    // webpack-dev-serverの設定
+    devServer: {
+        static: {
+            directory: path.resolve(__dirname, "public"), // publicディレクトリのサーバーを開く
+        },
+        open: true, // ブラウザに表示するためtrueへ 
+        port: "9000", // サーバーのポート番号
+        historyApiFallback: true,// 存在しないパスをリクエストされた場合に、404を返さずにファイルを戻す
     },
-
-    module: {
-        rules: [
-            {
-                test: /\.ts$/,
-                loader: 'ts-loader',
-            },
-            {
-                test: /\.html$/i,
-                loader: 'html-loader',
-                options: {
-                    minimize: true,
-                },
-            },
-        ],
-    },
-    plugins: [
-        new HtmlWebpackPlugin({
-            template: "./src/html/index.html"
-        }),
-    ],
-    resolve: {
-        extensions: [
-            '.ts',
-            '.js',
-        ],
-    },
-};
+    // devtool: "cheap-module-eval-source-map",　// ビルドの速度とデバックの品質を保つ
+});

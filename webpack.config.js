@@ -1,36 +1,38 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
-module.exports = {
-    mode: 'production',
+module.exports = () => {
+    return {
+        mode: 'production',
 
-    entry: {
-        main: './src/ts/main.ts',
-    },
+        entry: {
+            main: './src/ts/main.ts',
+        },
 
-    module: {
-        rules: [
-            {
-                test: /\.ts$/,
-                loader: 'ts-loader',
-            },
-            {
-                test: /\.html$/i,
-                loader: 'html-loader',
-                options: {
-                    minimize: true,
+        module: {
+            rules: [
+                {
+                    test: /\.ts$/,
+                    loader: 'ts-loader',
                 },
-            },
+                {
+                    test: /\.html$/i,
+                    loader: 'html-loader',
+                    options: {
+                        minimize: true,
+                    },
+                },
+            ],
+        },
+        plugins: [
+            new HtmlWebpackPlugin({
+                template: "./src/html/index.html"
+            }),
         ],
-    },
-    plugins: [
-        new HtmlWebpackPlugin({
-            template: "./src/html/index.html"
-        }),
-    ],
-    resolve: {
-        extensions: [
-            '.ts',
-            '.js',
-        ],
-    },
+        resolve: {
+            extensions: [
+                '.ts',
+                '.js',
+            ],
+        },
+    };
 };
